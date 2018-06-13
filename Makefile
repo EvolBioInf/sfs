@@ -15,9 +15,6 @@ $(EXECFILE).o: interface.h eprintf.h
 interface.o: interface.h
 eprintf.o: eprintf.h
 
-doc:
-	cd ../Doc; make clean; make pdf; cd ../$(DIRECTORY)_$(VERSION)
-
 # Other Standard make rules
 lint : 
 	lint $(SRCFILES) | more
