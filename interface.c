@@ -68,7 +68,7 @@ void printUsage(char *version){
   printf("Usage: %s [options] [inputFiles]\n",progname());
   printf("Compute the site frequency spectrum from Hudson's ms or from its theoretical expectation\n");
   printf("Example 1: ms 5 100000 -t 10 | sfs\n");
-  printf("Example 2: sfs -T 10 -n 5\n");
+  printf("Example 2: sfs -t 10 -n 5\n");
   printf("Options:\n");
   printf("\t[-t <NUM> theta; default: infer from input]\n");
   printf("\t[-n <NUM> sample size; default: infer from input]\n");
