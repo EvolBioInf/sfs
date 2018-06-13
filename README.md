@@ -1,4 +1,4 @@
-# `Sfs`
+# `sfs`
 ## Description
 Compute site frequence spectra.
 ## Author
