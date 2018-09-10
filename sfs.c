@@ -20,15 +20,23 @@ void scanFile(FILE *fp, Args *args){
   n = 0;
   while((sa = getSample(0)) != NULL){
     sp = computeSpectrum(sa, sp);
+    if(args->i) {
+      if(args->f)
+	foldSpectrum(sp);
+      printSpectrum(sp);
+      resetSpectrum(sp);
+    }
     n++;
   }
-  if(!args->r){
-    for(i=0;i<sp->n;i++)
-      sp->spectrum[i] /= (double)n;
+  if(!args->i) {
+    if(!args->r){
+      for(i=0;i<sp->n;i++)
+	sp->spectrum[i] /= (double)n;
+    }
+    if(args->f)
+      foldSpectrum(sp);
+    printSpectrum(sp);
   }
-  if(args->f)
-    foldSpectrum(sp);
-  printSpectrum(sp);
   freeSample();
 }
 

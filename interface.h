@@ -11,6 +11,7 @@ typedef struct args{
   char a;   /* hidden option */
   char f;   /* fold spectrum? */
   char r;   /* raw counts? */
+  char i;   /* inidvidual SFS? */
   double t; /* theta */
   int n;    /* sample size */
   int s;    /* hidden option */

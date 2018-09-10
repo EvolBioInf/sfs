@@ -19,6 +19,11 @@ Spectrum *getArtificialSpectrum(Args *args){
   return sfs;
 }
 
+void resetSpectrum(Spectrum *sp) {
+  for(int i = 0; i <= sp->n; i++)
+    sp->spectrum[i] = 0;
+}
+
 Spectrum *newSpectrum(int n){
   Spectrum *sp;
   int i;

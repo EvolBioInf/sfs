@@ -19,6 +19,7 @@ typedef struct spectrum{
 Spectrum *computeSpectrum(Sample *s, Spectrum *sp);
 void printSpectrum(Spectrum *s);
 void freeSectrum(Spectrum *sp);
+void resetSpectrum(Spectrum *sp);
 Spectrum *newSpectrum(int n);
 void foldSpectrum(Spectrum *sp);
 Spectrum *getArtificialSpectrum(Args *args);

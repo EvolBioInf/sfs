@@ -14,7 +14,7 @@ Args *args;
 
 Args *getArgs(int argc, char *argv[]){
   char c;
-  char *optString = "hvfrt:n:";
+  char *optString = "hvfrit:n:";
 
   args = (Args *)emalloc(sizeof(Args));
   args->h = 0;
@@ -22,6 +22,7 @@ Args *getArgs(int argc, char *argv[]){
   args->e = 0;
   args->t = 0;    /* theta */
   args->n = 0;
+  args->i = 0;    /* individual spectra? */
   args->r = 0;    /* print raw counts */
   args->f = 0;    /* fold spectrum */
   args->a = 0;    /* hidden option */
@@ -34,6 +35,9 @@ Args *getArgs(int argc, char *argv[]){
     switch(c){
     case 't':
       args->t = atof(optarg);
+      break;
+    case 'i':                          /* individual spectra */
+      args->i = 1;
       break;
     case 'r':                          /* raw counts */
       args->r = 1;
@@ -74,6 +78,7 @@ void printUsage(char *version){
   printf("\t[-n <NUM> sample size; default: infer from input]\n");
   printf("\t[-f fold spectrum]\n");
   printf("\t[-r raw counts; default: average counts]\n");
+  printf("\t[-i print individual spectra; default: average across all spectra]\n");
   printf("\t[-h print this help message and exit]\n");
   printf("\t[-v print program information and exit]\n");
   exit(0);
