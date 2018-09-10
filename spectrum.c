@@ -59,9 +59,9 @@ void printSpectrum(Spectrum *sp){
     n = sp->nFolded;
   else
     n = sp->n;
-  printf("#r\tf(r)\ttheta\n");
+  printf("#r\tf(r)\n");
   for(i=1;i<n;i++)
-    printf("%d\t%.3e\t%.3e\n",i,sp->spectrum[i],sp->spectrum[i]*i);
+    printf("%d\t%.3e\n",i,sp->spectrum[i]);
 }
 
 void freeSectrum(Spectrum *sp){
