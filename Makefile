@@ -1,22 +1,13 @@
-CC=gcc
-CFLAGS= -O3 -Wall -Wshadow -pedantic -std=gnu99 -g
-# The source files, object files, libraries and executable name.
-SRCFILES= sfs.c interface.c eprintf.c sample.c spectrum.c ran.c sequence_data.c stringUtil.c
-OBJFILES= sfs.o interface.o eprintf.o sample.c spectrum.o ran.o sequence_data.o stringUtil.o
-LIBS= -lm
-EXECFILE=sfs
-DIRECTORY=Sfs
-# The make rule for the executable
-.PHONY : all
-all : $(EXECFILE)
-$(EXECFILE) : $(OBJFILES)
-	$(CC) $(CFLAGS) -o $(EXECFILE) $(OBJFILES) $(LIBS)
-$(EXECFILE).o: interface.h eprintf.h
-interface.o: interface.h
-eprintf.o: eprintf.h
-
-# Other Standard make rules
-lint : 
-	lint $(SRCFILES) | more
+all:
+	(cd ms2sfs;  make all; mkdir -p ../build; mv ms2sfs  ../build)
+	(cd bootSfs; make all; mkdir -p ../build; mv bootSfs ../build)
+	(cd doc;     make all)	
+doc:
+	(cd doc; make all)
+test:
+	(cd ms2sfs;  make test)
+	(cd bootSfs; make test)
 clean:
-	rm -f *.o *~
+	(cd ms2sfs;  make clean)
+	(cd bootSfs; make clean)
+	(cd doc;     make clean)

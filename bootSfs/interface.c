@@ -13,40 +13,24 @@
 Args *args;
 
 Args *getArgs(int argc, char *argv[]){
-  char c;
-  char *optString = "hvfrit:n:";
+  int c;
+  char *optString = "hvs:i:";
 
   args = (Args *)emalloc(sizeof(Args));
+  args->i = DEFAULT_I;
+  args->s = 0;
   args->h = 0;
   args->v = 0;
   args->e = 0;
-  args->t = 0;    /* theta */
-  args->n = 0;
-  args->i = 0;    /* individual spectra? */
-  args->r = 0;    /* print raw counts */
-  args->f = 0;    /* fold spectrum */
-  args->a = 0;    /* hidden option */
-  args->s = 0;    /* hidden option */
-  args->m = 0;    /* hidden option */
-  args->f = 0;    /* hidden option */
-  args->c = 0;    /* hidden option */
+
   c = getopt(argc, argv, optString);
   while(c != -1){
     switch(c){
-    case 't':
-      args->t = atof(optarg);
+    case 's':                           /* seed for random number generator */
+      args->s = atoi(optarg);
       break;
-    case 'i':                          /* individual spectra */
-      args->i = 1;
-      break;
-    case 'r':                          /* raw counts */
-      args->r = 1;
-      break;
-    case 'n':
-      args->n = atoi(optarg);           /* sample size */
-      break;
-    case 'f':                           /* fold spectrum */
-      args->f = 1;
+    case 'i':                           /* nuber of iterations */
+      args->i = atoi(optarg);
       break;
     case '?':                           /* fall-through is intentional */
     case 'h':                           /* print help */
@@ -69,16 +53,12 @@ Args *getArgs(int argc, char *argv[]){
 
 
 void printUsage(char *version){
-  printf("Usage: %s [options] [inputFiles]\n",progname());
-  printf("Compute the site frequency spectrum from Hudson's ms or from its theoretical expectation\n");
-  printf("Example 1: ms 5 100000 -t 10 | sfs\n");
-  printf("Example 2: sfs -t 10 -n 5\n");
+  printf("Usage: %s [-i <iterations> -s <seed>] [inputFiles]\n",progname());
+  printf("Bootstrap site frequency specta\n");
+  printf("Example: bootSfs -i 10000 foo.sfs\n");
   printf("Options:\n");
-  printf("\t[-t <NUM> theta; default: infer from input]\n");
-  printf("\t[-n <NUM> sample size; default: infer from input]\n");
-  printf("\t[-f fold spectrum]\n");
-  printf("\t[-r raw counts; default: average counts]\n");
-  printf("\t[-i print individual spectra; default: average across all spectra]\n");
+  printf("\t[-i <NUM> number of iterations; default: %d]\n", DEFAULT_I);
+  printf("\t[-s <NUM> seed for random number generator; default: file|system]\n");
   printf("\t[-h print this help message and exit]\n");
   printf("\t[-v print program information and exit]\n");
   exit(0);

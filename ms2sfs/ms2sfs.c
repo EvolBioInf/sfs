@@ -7,37 +7,15 @@
 #include <stdlib.h>
 #include "interface.h"
 #include "eprintf.h"
-#include "sample.h"
-#include "spectrum.h"
+#include "sfs.h"
+#include "tab.h"
 
 void scanFile(FILE *fp, Args *args){ 
-  Sample *sa;
-  Spectrum *sp;
-  int i, n;
+  Sfs *sfs;
 
-  sa = initializeSample(fp, args);
-  sp = newSpectrum(sa->nsam);
-  n = 0;
-  while((sa = getSample(0)) != NULL){
-    sp = computeSpectrum(sa, sp);
-    if(args->i) {
-      if(args->f)
-	foldSpectrum(sp);
-      printSpectrum(sp);
-      resetSpectrum(sp);
-    }
-    n++;
-  }
-  if(!args->i) {
-    if(!args->r){
-      for(i=0;i<sp->n;i++)
-	sp->spectrum[i] /= (double)n;
-    }
-    if(args->f)
-      foldSpectrum(sp);
-    printSpectrum(sp);
-  }
-  freeSample();
+  sfs = newSfs(0, args->f);
+  while((sfs = nextSfs(fp, sfs)) != NULL)
+    printSfs(sfs);
 }
 
 int main(int argc, char *argv[]){
@@ -45,22 +23,14 @@ int main(int argc, char *argv[]){
   char *version;
   Args *args;
   FILE *fp;
-  Spectrum *sp;
 
-  version = "0.7";
-  setprogname2("sfs");
+  version = "0.1";
+  setprogname2("ms2sfs");
   args = getArgs(argc, argv);
   if(args->v)
     printSplash(version);
   if(args->h || args->e)
     printUsage(version);
-  if(args->t){
-    sp = getArtificialSpectrum(args);
-    if(args->f)
-      foldSpectrum(sp);
-    printSpectrum(sp);
-    return 0;
-  }
   if(args->numInputFiles == 0){
     fp = stdin;
     scanFile(fp, args);
@@ -71,6 +41,7 @@ int main(int argc, char *argv[]){
       fclose(fp);
     }
   }
+  tabFree();
   free(args);
   free(progname());
   return 0;

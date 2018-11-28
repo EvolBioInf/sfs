@@ -1,6 +1,6 @@
 # `sfs`
 ## Description
-Compute site frequence spectra.
+Deal with site frequence spectra.
 ## Author
 [Bernhard Haubold](http://thymine.evolbio.mpg.de/), `haubold@evolbio.mpg.de`
 ## [Documentation](http://github.com/evolbioinf/sfs/tree/master/doc/sfs.pdf)
