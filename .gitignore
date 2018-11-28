@@ -1,7 +1,6 @@
 *.o
 *.val
 *.sh
-sfs
 *.aux
 *.log
 *.ps
@@ -10,6 +9,7 @@ sfs
 *.tex
 *.bbl
 *.blg
+doc/Makefile
 randomSeed.dat
 seedms
 build
