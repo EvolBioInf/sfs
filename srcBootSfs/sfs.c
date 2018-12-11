@@ -77,8 +77,8 @@ Sfs *nextSfs(FILE *fp) {
       } else
 	return sfs;
     }
-    sfs->n = atoi(tabField(0));  /* degree */
-    f      = atoi(tabField(1));  /* count  */
+    sfs->n = atoi(tabField(0));      /* degree */
+    f      = (int)atof(tabField(1)); /* count  */
     sfs->G = (int *)erealloc(sfs->G, (sfs->n + 1) * sizeof(int));
     sfs->G[sfs->n] = f;
     sfs->s += sfs->G[sfs->n];
