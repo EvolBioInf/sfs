@@ -6,11 +6,15 @@
 *.ps
 *.dvi
 *.ps
-*.tex
+.tex
 *.bbl
 *.blg
 doc/Makefile
+doc/version.tex
+doc/sfs.pdf
 randomSeed.dat
 seedms
 build
+common/libcommon.a
 bootSfs
+ms2sfs

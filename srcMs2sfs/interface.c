@@ -58,8 +58,8 @@ void printUsage(char *version){
   exit(0);
 }
 
-void printSplash(char *version){
-  printf("%s %s\n", progname(), version);
+void printSplash(){
+  printf("%s %s, %s\n", progname(), VERSION, DATE);
   printf("Written by Bernhard Haubold.\n");
   printf("Distributed under the GNU General Public License.\n");
   printf("Please send bug reports to haubold@evolbio.mpg.de\n");

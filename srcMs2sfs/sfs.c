@@ -85,7 +85,7 @@ Sfs *nextSfs(FILE *fp, Sfs *sfs) {
 
   while((line = tabGetPlainLine(fp)) != NULL) {
     ln++;
-    if((line[0] == '1' || line[0] == '0') && ln > 1) {
+    if((line[0] == '1' || line[0] == '0') && ln > 2) {
       if(!open) {
 	open = 1;
 	n = 0;

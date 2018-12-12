@@ -26,19 +26,17 @@ void scanFile(FILE *fp, Args *args, gsl_rng *r){
 
 int main(int argc, char *argv[]){
   int i;
-  char *version;
   Args *args;
   FILE *fp;
   gsl_rng *r;
 
-  version = "0.1";
   setprogname2("bootSfs");
   args = getArgs(argc, argv);
   r = ini_gsl_rng(args);
   if(args->v)
-    printSplash(version);
+    printSplash();
   if(args->h || args->e)
-    printUsage(version);
+    printUsage();
   if(args->numInputFiles == 0){
     fp = stdin;
     scanFile(fp, args, r);

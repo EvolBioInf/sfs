@@ -52,7 +52,7 @@ Args *getArgs(int argc, char *argv[]){
 }
 
 
-void printUsage(char *version){
+void printUsage(){
   printf("Usage: %s [-i <iterations> -s <seed>] [inputFiles]\n",progname());
   printf("Bootstrap site frequency specta\n");
   printf("Example: bootSfs -i 10000 foo.sfs\n");
@@ -64,8 +64,8 @@ void printUsage(char *version){
   exit(0);
 }
 
-void printSplash(char *version){
-  printf("%s %s\n",progname(),version);
+void printSplash(){
+  printf("%s %s, %s\n",progname(), VERSION, DATE);
   printf("Written by Bernhard Haubold.\n");
   printf("Distributed under the GNU General Public License.\n");
   printf("Please send bug reports to haubold@evolbio.mpg.de\n");

@@ -1,9 +1,11 @@
 CC=gcc
-CFLAGS= -O3 -Wall -Wshadow -pedantic -std=gnu99 -g
+export VERSION = $(shell git describe)
+export DATE    = $(shell git log | grep Date | head -n 1 | awk '{printf "%s\\ %s\\ %s\\ %s\\ %s\n", $$2, $$3, $$4, $$5, $$6}')
+CFLAGS = -DVERSION=\"$(VERSION)\" -DDATE=\"$(DATE)\" -O3 -Wall -Wshadow -pedantic -std=gnu99 -g -I../common/ -L../common/ #-pg
 # The source files, object files, libraries and executable name.
-SRCFILES= ms2sfs.c interface.c eprintf.c sfs.c tab.c
-OBJFILES= ms2sfs.o interface.o eprintf.o sfs.o tab.o
-LIBS= -lm
+SRCFILES= ms2sfs.c interface.c sfs.c
+OBJFILES= ms2sfs.o interface.o sfs.o
+LIBS= -lm -lcommon
 EXECFILE=ms2sfs
 DIRECTORY=ms2sfs
 # The make rule for the executable

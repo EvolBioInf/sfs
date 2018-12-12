@@ -20,17 +20,15 @@ void scanFile(FILE *fp, Args *args){
 
 int main(int argc, char *argv[]){
   int i;
-  char *version;
   Args *args;
   FILE *fp;
 
-  version = "0.1";
   setprogname2("ms2sfs");
   args = getArgs(argc, argv);
   if(args->v)
-    printSplash(version);
+    printSplash();
   if(args->h || args->e)
-    printUsage(version);
+    printUsage();
   if(args->numInputFiles == 0){
     fp = stdin;
     scanFile(fp, args);

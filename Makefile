@@ -1,12 +1,17 @@
+TAG := $(shell git describe | sed 's/-.*//')
 all:
 	make -C srcMs2sfs
 	mkdir -p build
-	mv srcMs2sfs/ms2sfs  build
+	cp srcMs2sfs/ms2sfs  build
 	make -C srcBootSfs
-	mv srcBootSfs/bootSfs build
+	cp srcBootSfs/bootSfs build
 test:
 	make -C srcMs2sfs test
 	make -C srcBootSfs test
 clean:
 	make -C srcMs2sfs clean
 	make -C srcBootSfs clean
+.PHONY:	doc
+doc:	
+	echo $(TAG) > doc/version.tex
+	make -C doc

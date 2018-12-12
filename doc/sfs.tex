@@ -1,0 +1,150 @@
+\documentclass[a4paper]{article}
+\usepackage{graphics,eurosym,latexsym}
+\usepackage{listings}
+\lstset{columns=fixed,basicstyle=\ttfamily,numbers=left,numberstyle=\tiny,stepnumber=5,breaklines=true}
+\usepackage{times}
+\usepackage[round]{natbib}
+\bibliographystyle{plainnat}
+\oddsidemargin=0cm
+\evensidemargin=0cm
+\headsep=0cm
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\I}{\item}
+\newcommand{\ty}{\texttt}
+\newcommand{\kr}{K_{\rm r}}
+\textwidth=16cm
+\textheight=23cm
+\begin{document}
+\title{\ty{sfs} \input{version}: Compute and Bootstrap Site Frequency Spectra}
+\author{Bernhard Haubold\\\small Max-Planck-Institute for Evolutionary Biology, Pl\"on, Germany}
+\maketitle
+\section{Introduction}
+For a sample of $n$ haplotypes let $f_i(n)$ be the number of sites where $i$
+haplotypes carry a mutation. The vector
+\[
+f_1(n), f_2(n),...,f_{n-1}(n)
+\]
+is called the \textit{site frequency spectrum} of the haplotype sample. The package \ty{sfs}
+contains two programs, \ty{ms2sfs} and \ty{bootSfs}, for computing and bootstrapping
+site frequency spectra. \ty{Ms2sfs}
+takes as input multiple haplotype samples simulated with \ty{ms}
+\citep{hud02:gen} and prints the corresponding site frequency
+spectra. \ty{BootSfs} takes as input one or more site frequency spectra and
+bootstraps them.
+\section{Getting Started}
+\ty{Ms2sfs}  and \ty{bootSfs} were written in C on a computer running Linux and should
+work on any standard UNIX system.
+However, please contact me at \ty{haubold@evolbio.mpg.de} if you have any problems with the programs.
+\bi
+\I Download the software
+\begin{verbatim}
+git clone https://www.github.com/evolbioinf/sfs
+\end{verbatim}
+\I Change into the downloaded directory
+\begin{verbatim}
+cd sfs
+\end{verbatim}
+\I Generate \ty{ms2sfs} \& \ty{bootSfs}
+\begin{verbatim}
+make
+\end{verbatim}
+\I Run the test scripts
+\begin{verbatim}
+make test
+\end{verbatim}
+The executables \ty{ms2sfs} and \ty{bootSfs} are now located in the
+directory \ty{build}. Place them into your PATH.
+\item Make the documentation
+\begin{verbatim}
+make doc
+\end{verbatim}
+The documentation is now in
+\begin{verbatim}
+doc/sfs.pdf
+\end{verbatim}
+\end{itemize}
+\subsection{\ty{ms2sfs}}
+\begin{itemize}
+\I List the options
+\begin{verbatim}
+ms2sfs -h
+\end{verbatim}
+\I Test it on a data set consisting of 2 simulated samples of
+five (odd) haplotypes.
+\begin{verbatim}
+ms2sfs data/msOdd.dat
+\end{verbatim}
+\I Compute the folded site frequency spectrum
+\begin{verbatim}
+ms2sfs -f data/msOdd.dat
+\end{verbatim}
+\I Repeat for one sample of six (even) haplotypes
+\begin{verbatim}
+ms2sfs data/msEven.dat
+ms2sfs -f data/msEven.dat
+\end{verbatim}
+\I Apply \ty{ms2sfs} to $10^4$ simulated haplotypes
+\begin{verbatim}
+ms 10 10000 -t 10 | ms2sfs | tail
+\end{verbatim}
+where \ty{ms} is the coalescent simulator by \cite{hud02:gen}.
+\ei
+\subsection{\ty{bootSfs}}
+\begin{itemize}
+\item List options
+\begin{verbatim}
+bootSfs -h
+\end{verbatim}
+  \I Read one site frequency spectrum and bootstrap it twice:
+\begin{verbatim}
+bootSfs -i 2 data/test.sfs
+\end{verbatim}
+\I In case a particular run needs to be duplicated exactly, set the seed
+for the random number generator:
+\begin{verbatim}
+bootSfs -i 2 -s 13 data/test.sfs  
+\end{verbatim}
+\end{itemize}
+
+\section{Change Log}
+\begin{itemize}
+\item Version 0.1 (September 25, 2017)
+  \begin{itemize}
+  \item First working version.
+  \end{itemize}
+\item Version 0.2 (October 23, 2017)
+  \begin{itemize}
+  \item Polished interface.
+  \end{itemize}
+\item Version 0.3 (November 17, 2017)
+  \begin{itemize}
+  \item Implemented folding of SFS (\ty{-F}).
+  \end{itemize}
+\item Version 0.4 (November 29, 2017)
+  \begin{itemize}
+  \item Enable analytic computation of SFS (\ty{-T} to specify
+    $\theta$ and \ty{-n} to specify sample size.
+  \end{itemize}
+\item Version 0.5 (December 1, 2017)
+  \begin{itemize}
+  \item Fixed error in folding.
+  \end{itemize}
+\item Version 0.6 (December 18, 2017)
+  \begin{itemize}
+  \item Cleaned up interface.
+  \end{itemize}
+\item Version 0.7
+  \begin{itemize}
+    \item Implemented \ty{-r} for printing raw counts.
+  \end{itemize}
+\item June 13, 2018
+  \begin{itemize}
+  \item Posted on \ty{github}.
+    \end{itemize}
+\end{itemize}
+\bibliography{ref}
+\end{document}
+
