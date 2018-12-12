@@ -8,7 +8,6 @@
 .tex
 *.bbl
 *.blg
-doc/Makefile
 doc/version.tex
 doc/sfs.pdf
 randomSeed.dat
