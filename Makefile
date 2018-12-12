@@ -1,5 +1,6 @@
 TAG := $(shell git describe | sed 's/-.*//')
 all:
+	make -C common
 	make -C srcMs2sfs
 	mkdir -p build
 	cp srcMs2sfs/ms2sfs  build
@@ -11,6 +12,7 @@ test:
 clean:
 	make -C srcMs2sfs clean
 	make -C srcBootSfs clean
+	make -C common clean
 .PHONY:	doc
 doc:	
 	echo $(TAG) > doc/version.tex
