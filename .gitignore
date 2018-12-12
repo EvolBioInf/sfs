@@ -1,6 +1,5 @@
 *.o
 *.val
-*.sh
 *.aux
 *.log
 *.ps
@@ -18,3 +17,4 @@ build
 common/libcommon.a
 bootSfs
 ms2sfs
+valgrind.sh
