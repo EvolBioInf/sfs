@@ -1,8 +1,10 @@
-\documentclass[a4paper]{article}
+\documentclass[english,a4paper]{article}
 \usepackage{graphics,eurosym,latexsym}
 \usepackage{listings}
 \lstset{columns=fixed,basicstyle=\ttfamily,numbers=left,numberstyle=\tiny,stepnumber=5,breaklines=true}
 \usepackage{times}
+\usepackage{babel}
+\usepackage[useregional]{datetime2}
 \usepackage[round]{natbib}
 \bibliographystyle{plainnat}
 \oddsidemargin=0cm
@@ -20,6 +22,7 @@
 \begin{document}
 \title{\ty{sfs} \input{version}: Compute and Bootstrap Site Frequency Spectra}
 \author{Bernhard Haubold\\\small Max-Planck-Institute for Evolutionary Biology, Pl\"on, Germany}
+\date{\input{date}}
 \maketitle
 \section{Introduction}
 For a sample of $n$ haplotypes let $f_i(n)$ be the number of sites where $i$

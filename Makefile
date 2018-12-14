@@ -1,4 +1,3 @@
-TAG := $(shell git describe | sed 's/-.*//')
 all:
 	make -C common
 	make -C srcMs2sfs
@@ -15,5 +14,4 @@ clean:
 	make -C common clean
 .PHONY:	doc
 doc:	
-	echo $(TAG) > doc/version.tex
 	make -C doc

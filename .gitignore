@@ -9,6 +9,7 @@
 *.bbl
 *.blg
 doc/version.tex
+doc/date.tex
 doc/sfs.pdf
 randomSeed.dat
 seedms

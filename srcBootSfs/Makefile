@@ -1,6 +1,6 @@
 CC=gcc
-export VERSION = $(shell git describe)
-export DATE    = $(shell git log | grep Date | head -n 1 | awk '{printf "%s\\ %s\\ %s\\ %s\\ %s\n", $$2, $$3, $$4, $$5, $$6}')
+export VERSION = $(shell bash ../scripts/getVersion.sh) 
+export DATE    = $(shell bash ../scripts/getDate.sh) 
 CFLAGS = -DVERSION=\"$(VERSION)\" -DDATE=\"$(DATE)\" -O3 -Wall -Wshadow -pedantic -std=gnu99 -g -I../common/ -L../common/ #-pg
 # The source files, object files, libraries and executable name.
 SRCFILES= bootSfs.c interface.c gsl_rng.c sfs.c
@@ -8,7 +8,6 @@ OBJFILES= bootSfs.o interface.o gsl_rng.o sfs.o
 LIBS= -lm -lgsl -lblas -lcommon
 EXECFILE=bootSfs
 DIRECTORY=bootSfs
-VERSION=0.1
 # The make rule for the executable
 .PHONY : all
 all : $(EXECFILE)
