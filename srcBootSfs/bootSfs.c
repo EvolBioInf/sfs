@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
       fclose(fp);
     }
   }
-  free_gsl_rng(r, args);
+  gsl_rng_free(r);
   free(args);
   free(progname());
   tabFree();
