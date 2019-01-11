@@ -59,7 +59,7 @@ void printUsage(){
   printf("Example: bootSfs -i 10000 foo.sfs\n");
   printf("Options:\n");
   printf("\t[-i <NUM> number of iterations; default: %d]\n", DEFAULT_I);
-  printf("\t[-s <NUM> seed for random number generator; default: file|system]\n");
+  printf("\t[-s <NUM> seed for random number generator; default: system]\n");
   printf("\t[-h print this help message and exit]\n");
   printf("\t[-v print program information and exit]\n");
   exit(0);
