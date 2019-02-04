@@ -5,6 +5,7 @@
  **************************************************/
 #include <stdio.h>
 #include <stdlib.h>
+#include <gsl/gsl_randist.h>
 #include "tab.h"
 #include "eprintf.h"
 #include "gsl_rng.h"
@@ -12,20 +13,9 @@
 
 void freeSfs(Sfs *s) {
   free(s->G);
-  free(s->a);
+  free(s->p);
+  free(s->m);
   free(s);
-}
-
-void iniBoot(Sfs *os) {
-  int k = 0;
-  os->a = (int *)emalloc(os->s * sizeof(int));
-  for(int i = 0; i < os->n; i++)
-    for(int j = 0; j < os->G[i]; j++)
-      os->a[k++]  = i;
-  if(k != os->s) {
-    fprintf(stderr, "ERROR[bootSfs]: iniBoot.\n");
-    exit(-1);
-  }
 }
 
 void printSfs(Sfs *s) {
@@ -35,23 +25,22 @@ void printSfs(Sfs *s) {
 }
 
 void bootSfs(Sfs *os, Sfs *bs, gsl_rng *r) {
-  if(os->a == NULL)
-    iniBoot(os);
+  gsl_ran_multinomial(r, os->n, os->s, os->p, os->m);
   for(int i = 0; i < os->n; i++)
-    bs->G[i] = 0;
-  for(int i = 0; i < os->s; i++){
-    int y = (int)(gsl_rng_uniform(r) * os->s);
-    bs->G[os->a[y]]++;
-  }
+    bs->G[i] = os->m[i];
 }
 
 Sfs *newSfs(int n) {
   Sfs *sfs = (Sfs *)emalloc(sizeof(Sfs));
   sfs->n = n;
   sfs->G = (int *)emalloc(n * sizeof(int));
-  sfs->a = NULL;
-  for(int i = 0; i < n; i++)
+  sfs->m = (unsigned int *)emalloc(n * sizeof(unsigned int));
+  sfs->p = (double *)emalloc(n * sizeof(double));
+  for(int i = 0; i < n; i++) {
     sfs->G[i] = 0;
+    sfs->p[i] = 0;
+    sfs->m[i] = 0;
+  }
   sfs->s = 0;
 
   return sfs;
@@ -86,6 +75,10 @@ Sfs *nextSfs(FILE *fp) {
   sfs->n++;
   if(line == NULL)
     last = 1;
-
+  /* compute probability distribution */
+  sfs->p = (double *)erealloc(sfs->p, sfs->n * sizeof(double));
+  sfs->m = (unsigned int *)erealloc(sfs->m, sfs->n * sizeof(unsigned int));
+  for(int i = 0; i < sfs->n; i++)
+    sfs->p[i] = (double)sfs->G[i] / sfs->s;
   return sfs;
 }

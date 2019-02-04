@@ -1,4 +1,4 @@
-../build/bootSfs -s 13 -i 5 ../data/test.sfs > tmp.out
+./bootSfs -s 13 -i 5 ../data/test.sfs > tmp.out
 DIFF=$(diff tmp.out ../data/test.out)
 if [ "$DIFF" == "" ] 
 then

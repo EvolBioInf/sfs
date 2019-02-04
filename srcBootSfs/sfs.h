@@ -8,10 +8,11 @@
 
 /* site frequency spectrum */
 typedef struct sfs {
-  int *G; /* the spectrum                    */
-  int  n; /* size of G                       */
-  int *a; /* array of integers for bootstrap */
-  int  s; /* size of a                       */
+  int          *G; /* the spectrum                         */
+  int           n; /* size of G                            */
+  double       *p; /* array of probabilities               */
+  unsigned int *m; /* array of multinomial random variates */
+  int           s; /* number of sites in sectrum           */
 } Sfs;
 
 
