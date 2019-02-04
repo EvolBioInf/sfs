@@ -8,6 +8,7 @@
 .tex
 *.bbl
 *.blg
+*.org
 doc/version.tex
 doc/date.tex
 doc/sfs.pdf
