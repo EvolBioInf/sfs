@@ -9,5 +9,8 @@ all:
 	latex sfs
 	latex sfs
 	dvipdf sfs
+	if [ -d /mnt/c/Users/haubold/ownCloud\ -\ haubold@evolbio.mpg.de@owncloud.gwdg.de/docs/ ]; then \
+		cp sfs.pdf /mnt/c/Users/haubold/ownCloud\ -\ haubold@evolbio.mpg.de@owncloud.gwdg.de/docs/; \
+	fi
 clean:	
 	rm -f epos.pdf *.log *.bbl *.blg *.dvi
