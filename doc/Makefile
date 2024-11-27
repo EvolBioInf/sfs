@@ -1,7 +1,8 @@
 TAG     := $(shell git describe | sed 's/-.*//')
 DATE    := $(shell git log -1 --format=%ai $(TAG) | sed 's/-/ /g' | awk '{printf "\\\\DTMdisplaydate{%s}{%s}{%s}{-1}\n", $$1, $$2, $$3}')
 VERSION := $(shell git describe | sed 's/^[vV]//; s/-.*//')
-all: sfs.tex ref.bib
+all: sfs.pdf
+sfs.pdf: sfs.tex ref.bib
 	echo $(VERSION) > version.tex
 	echo $(DATE)    > date.tex
 	latex sfs
