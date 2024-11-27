@@ -1,4 +1,4 @@
-# [`sfs`](https://owncloud.gwdg.de/index.php/s/WgGHb6utkHOCRBI)
+# [`sfs`](https://owncloud.gwdg.de/index.php/s/StGpFWHxa1jnUgX)
 ## Description
 Deal with site frequence spectra.
 ## Author
