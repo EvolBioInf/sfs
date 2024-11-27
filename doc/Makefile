@@ -14,4 +14,4 @@ publish: sfs.pdf
 		cp sfs.pdf /mnt/c/Users/haubold/ownCloud\ -\ haubold@evolbio.mpg.de@owncloud.gwdg.de/docs/; \
 	fi
 clean:	
-	rm -f epos.pdf *.log *.bbl *.blg *.dvi
+	rm -f sfs.pdf *.log *.bbl *.blg *.dvi
